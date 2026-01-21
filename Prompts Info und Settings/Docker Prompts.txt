@@ -1,0 +1,51 @@
+### 1. Das System starten und verwalten
+
+
+START
+
+docker-compose up -d
+
+
+
+STOP
+
+docker-compose down
+
+
+COntainer Check
+
+docker-compose ps
+
+
+
+
+### 2. In die Maschine "hineingehen" (Terminal)öffnen
+
+
+docker exec -it klaios-core bash
+
+
+
+### 3. Port-Management (Das Tunnel-Prinzip)
+
+Das ist der Teil, den wir für Pinggy und Ngrok gebraucht haben.
+
+* **`-p 4444:4444`** (In der Konfigurationsdatei)
+* **Erklärung:** Das verbindet dein "echtes" Windows/Linux mit dem "inneren" Kali. Alles, was von Pinggy an dein System auf Port 4444 geschickt wird,
+ wird direkt an Kali durchgereicht. Ohne diese Brücke würde der Tunnel an der Außenwand des Docker-Containers abprallen.
+
+
+
+### 4. Datei-Management (Der Workspace)
+
+* **`ls -l workspace/`**
+* **Erklärung:** Listet die Dateien im gemeinsamen Ordner auf. Da `msfvenom` die `game.apk` in den Ordner `workspace` speichert, ist sie sowohl für Kali als auch für dein Windows-System (über den geteilten Ordner) sichtbar.
+
+
+
+### Zusammenfassung der heutigen Routine
+
+1. Check: `docker exec -it klaios-core curl ifconfig.me` (VPN-IP pruefen).
+2. Start: `docker-compose up -d`.
+3. Terminal: `docker exec -it klaios-core bash`.
+4. Action: In der `msfconsole` den Listener auf Port 4444 starten.

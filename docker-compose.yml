@@ -1,0 +1,54 @@
+services:
+  # 1. VPN Bunker (Gluetun)
+  # Dieser Container hält die Verbindung und schützt alles.
+  vpn:
+    image: qmcgaw/gluetun
+    container_name: klaios-vpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - "4444:4444"  # <--- HIER IST DIE BRÜCKE FÜR DEIN HANDY! (Metasploit)
+    
+    # DNS-Sicherung
+    dns:
+      - 8.8.8.8
+      
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${VPN_USER}
+      - OPENVPN_PASSWORD=${VPN_PASSWORD}
+      - SERVER_COUNTRIES=${VPN_COUNTRY}
+      - FREE_ONLY=on
+      
+      # Sicherheitseinstellungen
+      - DOT=off
+      - DNS_ADDRESS=8.8.8.8
+      
+      # Zugriff auf Heimnetz erlauben (Handy/Router Scans)
+      - FIREWALL_OUTBOUND_SUBNETS=192.168.0.0/16
+      
+    restart: always
+
+  # 2. Kali Workbench (Das Hacking-Tool)
+  # Nutzt das Netzwerk des VPN-Containers.
+  workbench:
+    build: ./kali-custom
+    container_name: klaios-core
+    restart: unless-stopped
+    
+    # --- WICHTIG: DER FIX FÜR NMAP ---
+    privileged: true
+    # ---------------------------------
+    
+    # Huckepack auf VPN-Netzwerk
+    network_mode: service:vpn
+    
+    environment:
+      - PERPLEXITY_API_KEY=${PERPLEXITY_API_KEY}
+      
+    volumes:
+      # 1. Dein Workspace
+      - ./workspace:/home/researcher/workspace

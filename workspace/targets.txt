@@ -1,0 +1,30 @@
+# KLAIOS ZIEL-LISTE (AUTHORIZED TESTING ONLY)
+
+1. http://testphp.vulnweb.com
+   - Test: SQL Injection, XSS
+   - Tool: Red Team Tab -> Web Injection
+
+2. http://demo.testfire.net
+   - Test: Port Scan, Service Detection
+   - Tool: Scanner Tab -> Deep Inspection
+
+3. scanme.nmap.org
+   - Test: Connectivity Check
+   - Tool: Overview Tab
+
+4. (Dein lokales Handy) 192.168.x.x
+   - Test: Payload Delivery
+   - Tool: Social Engineering Tab
+
+
+
+ngrok
+
+joyboy
+redom2@atomicmail.io
+
+Jallo.1234.Hallo
+
+
+
+
