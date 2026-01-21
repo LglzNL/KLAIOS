@@ -122,7 +122,5 @@ msfconsole -x "use exploit/multi/handler; set PAYLOAD windows/x64/meterpreter/re
 
 1. **Rechtliches:** Scanne NUR eigene Geräte oder Ziele mit ausdrücklicher Erlaubnis (`scanme.nmap.org`).
 2. **OpSec:** Pruefe vor jedem Scan kurz mit `curl ifconfig.me`, ob die VPN-IP aktiv ist.
-3. **Phishing:** Sende Phishing-Mails nur an deine eigenen Test-Accounts. Gmail sperrt Accounts, die echtes Spamming betreiben.   Und mit drr auto_hacker.py nur eigene netzwerke mit Erlaubnis benutzen im Workspace.
+3. **Phishing:** Sende Phishing-Mails nur an deine eigenen Test-Accounts. Gmail sperrt Accounts, die echtes Spamming betreiben.   Und mit auto_hacker.py bzw das Script nur in  eigene netzwerke mit Erlaubnis benutzen.
 
-
----
